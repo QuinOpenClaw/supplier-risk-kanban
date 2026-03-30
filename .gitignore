@@ -1,34 +1,16 @@
-# Python
 __pycache__/
-*.py[cod]
+*.pyc
 *.pyo
+.env
+*.db
+*.sqlite
+venv/
+.venv/
 *.egg-info/
 dist/
 build/
-.eggs/
-
-# Virtual environment
-.venv/
-venv/
-env/
-
-# Database
-*.db
-*.sqlite
-*.sqlite3
-
-# Environment files
-.env
-.env.*
-*.env
-
-# Logs
+.pytest_cache/
 *.log
-
-# OS
-.DS_Store
-Thumbs.db
-
-# IDE
-.vscode/
-.idea/
+*.tar.gz
+photos/
+data/
