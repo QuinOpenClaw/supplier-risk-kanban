@@ -1,0 +1,25 @@
+<div class="column-header">
+    <h2>{{ col.name }}</h2>
+    <span class="card-count">{{ col.cards | length }}</span>
+</div>
+<div class="card-list" data-column-id="{{ col.id }}">
+    {% for card in col.cards %}
+    {% include "partials/card.html" %}
+    {% endfor %}
+</div>
+<button class="add-card-btn" id="add-card-btn-{{ col.id }}" onclick="openNewCardForm({{ col.id }})">+ Add card</button>
+
+<form class="new-card-form hidden" id="new-card-form-{{ col.id }}"
+      hx-post="{{ api_base }}/cards"
+      hx-target="#column-{{ col.id }}"
+      hx-swap="innerHTML">
+    <input type="hidden" name="column_id" value="{{ col.id }}">
+    <input type="text" name="title" placeholder="User story title..." required class="card-input">
+    <textarea name="description" placeholder="Description of task..." rows="2" class="card-input"></textarea>
+    <textarea name="expected_outcome" placeholder="Expected outcome..." rows="2" class="card-input"></textarea>
+    <input type="url" name="url" placeholder="Resource URL (optional)" class="card-input">
+    <div class="new-card-buttons">
+        <button type="submit" class="btn btn-primary">Add</button>
+        <button type="button" class="btn btn-secondary" onclick="closeNewCardForm({{ col.id }})">Cancel</button>
+    </div>
+</form>

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}{{ board.name }} — Veerless Kanban{% endblock %}
+{% block content %}
+<div class="board-header">
+    <div class="board-header-row">
+        <div>
+            <h1>{{ board.name }}</h1>
+            {% if board.description %}<p class="board-desc">{{ board.description }}</p>{% endif %}
+        </div>
+        <div class="board-actions">
+            <div class="search-wrap">
+                <input type="search" id="card-search" placeholder="🔍 Search cards…" class="card-search-input" oninput="searchCards(this.value)">
+            </div>
+            <input type="file" id="import-file" accept=".json" hidden>
+            <button class="btn btn-secondary" onclick="document.getElementById('import-file').click()">⬆ Import JSON</button>
+        </div>
+    </div>
+</div>
+<div class="board-grid">
+    {% for col in columns %}
+    <div class="column" id="column-{{ col.id }}" hx-swap-oob="true">
+        {% include "partials/column.html" %}
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

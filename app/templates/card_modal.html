@@ -1,0 +1,59 @@
+<div class="modal-card">
+    <div class="modal-header">
+        <h2>Edit Card</h2>
+        <button class="modal-close" onclick="closeModal()">&times;</button>
+    </div>
+    <form hx-post="{{ api_base }}/cards/{{ card.id }}/update"
+          hx-target="#column-{{ card.column_id }}"
+          hx-swap="innerHTML"
+          hx-on::after-request="if(event.detail.successful) { closeModal(); }">
+
+        <div class="modal-row-2">
+            <label>Step
+                <input type="text" name="step" value="{{ card.step }}" placeholder="e.g. 1, 2a…" class="card-input">
+            </label>
+            <label>Category
+                <input type="text" name="category" value="{{ card.category }}" placeholder="e.g. Access Control" class="card-input">
+            </label>
+        </div>
+
+        <label>Title
+            <input type="text" name="title" value="{{ card.title }}" required class="card-input">
+        </label>
+
+        <label>Action
+            <textarea name="action" rows="3" class="card-input" placeholder="What needs to be done?">{{ card.action }}</textarea>
+        </label>
+
+        <label>Expected Outcome
+            <textarea name="expected_outcome" rows="2" class="card-input">{{ card.expected_outcome }}</textarea>
+        </label>
+
+        <label>Finding
+            <textarea name="finding" rows="3" class="card-input" placeholder="What was discovered?">{{ card.finding }}</textarea>
+        </label>
+
+        <div class="modal-links">
+            <label>Link 1
+                <input type="url" name="url" value="{{ card.url }}" placeholder="https://…" class="card-input">
+            </label>
+            <label>Link 2
+                <input type="url" name="link2" value="{{ card.link2 }}" placeholder="https://…" class="card-input">
+            </label>
+            <label>Link 3
+                <input type="url" name="link3" value="{{ card.link3 }}" placeholder="https://…" class="card-input">
+            </label>
+        </div>
+
+        <div class="modal-actions">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-danger"
+                    hx-delete="{{ api_base }}/cards/{{ card.id }}"
+                    hx-target="#column-{{ card.column_id }}"
+                    hx-swap="innerHTML"
+                    hx-confirm="Delete this card?"
+                    hx-on::after-request="if(event.detail.successful) { closeModal(); }">Delete</button>
+            <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+        </div>
+    </form>
+</div>

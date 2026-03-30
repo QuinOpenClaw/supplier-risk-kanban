@@ -1,0 +1,23 @@
+<div class="card" data-card-id="{{ card.id }}"
+     data-search="{{ [card.title, card.step, card.category, card.action, card.expected_outcome, card.finding, card.url, card.link2, card.link3] | join(' ') | lower }}"
+     onclick="openEditModal({{ card.id }})">
+    {% if card.step or card.category %}
+    <div class="card-meta">
+        {% if card.step %}<span class="card-step">Step {{ card.step }}</span>{% endif %}
+        {% if card.category %}<span class="card-category">{{ card.category }}</span>{% endif %}
+    </div>
+    {% endif %}
+    <h3 class="card-title">{{ card.title }}</h3>
+    {% if card.action %}
+    <p class="card-desc">{{ card.action | truncate(80) }}</p>
+    {% endif %}
+    {% if card.expected_outcome %}
+    <p class="card-outcome"><strong>Outcome:</strong> {{ card.expected_outcome | truncate(60) }}</p>
+    {% endif %}
+    {% if card.finding %}
+    <p class="card-finding"><strong>Finding:</strong> {{ card.finding | truncate(60) }}</p>
+    {% endif %}
+    {% if card.url %}
+    <a class="card-url" href="{{ card.url }}" target="_blank" rel="noopener" onclick="event.stopPropagation()">{{ card.url | truncate(40) }}</a>
+    {% endif %}
+</div>

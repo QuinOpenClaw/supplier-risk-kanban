@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Veerless Kanban{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/auth/assets/css/header.css" />
+    <link rel="stylesheet" href="{{ request.url_for('static', path='css/style.css') }}">
+    <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/Sortable.min.js"></script>
+    <script>
+        window.API_BASE = "{{ api_base }}";
+    </script>
+</head>
+<body>
+    <div id="suite-header"></div>
+    <script defer src="/auth/assets/js/suite-header.js"></script>
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+    <div id="modal-overlay" class="modal-overlay hidden" onclick="closeModal(event)">
+        <div id="modal-container" class="modal-container" onclick="event.stopPropagation()"></div>
+    </div>
+    <script src="{{ request.url_for('static', path='js/app.js') }}"></script>
+</body>
+</html>
